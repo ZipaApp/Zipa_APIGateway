@@ -1,3 +1,6 @@
-flask
+fastapi
+uvicorn
+httpx
 requests
-flask-cors
+python-multipart
+

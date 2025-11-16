@@ -1,14 +1,19 @@
 FROM python:3.10-slim
 
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /app
 
-COPY requirements.txt ./
+# Instalar dependencias
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copiar todo el proyecto (incluye carpeta app/)
 COPY . .
 
+# Exponer el puerto
 EXPOSE 5000
 
-ENV FLASK_APP=controller.py
+# Ejecutar FastAPI con Uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
 
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
